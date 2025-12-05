@@ -5,6 +5,7 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 const navItems = [
     { name: "Home", link: "home" },
@@ -60,21 +61,24 @@ export const Navbar = () => {
                     Munawar T
                 </ScrollLink>
 
+
+
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center gap-8">
                     {navItems.map((item, idx) => (
-                        <ScrollLink
-                            key={idx}
-                            to={item.link}
-                            spy={true}
-                            smooth={true}
-                            offset={-100}
-                            duration={500}
-                            activeClass="text-primary font-semibold"
-                            className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary cursor-pointer transition-colors"
-                        >
-                            {item.name}
-                        </ScrollLink>
+                        <MagneticButton key={idx}>
+                            <ScrollLink
+                                to={item.link}
+                                spy={true}
+                                smooth={true}
+                                offset={-100}
+                                duration={500}
+                                activeClass="text-primary font-semibold"
+                                className="text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-primary cursor-pointer transition-colors px-2 py-1"
+                            >
+                                {item.name}
+                            </ScrollLink>
+                        </MagneticButton>
                     ))}
                 </div>
 

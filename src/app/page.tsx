@@ -1,3 +1,5 @@
+"use client";
+
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { data } from "@/lib/data";
 import {
@@ -5,14 +7,18 @@ import {
   IconBrandLinkedin,
   IconBrandTwitter,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+
+const Tilt = dynamic(() => import("react-parallax-tilt"), { ssr: false });
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/motion";
 import { CodeSnippet } from "@/components/ui/code-snippet";
 import { ContactForm } from "@/components/ui/contact-form";
-import dynamic from "next/dynamic";
+
 
 const CaseStudyCard = dynamic(() => import("@/components/ui/case-study-card").then(mod => mod.CaseStudyCard), {
   loading: () => <div className="h-96 w-full animate-pulse rounded-3xl bg-neutral-100 dark:bg-neutral-800" />,
@@ -28,15 +34,21 @@ export default function Home() {
       <HeroHighlight>
         <StaggerContainer className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4" id="home">
           <FadeIn>
-            <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl">
-              <Image
-                src={data.basic.photos[0]}
-                alt={data.basic.firstName}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
+            <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} scale={1.1} transitionSpeed={2500}>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl cursor-pointer"
+              >
+                <Image
+                  src={data.basic.photos[0]}
+                  alt={data.basic.firstName}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+            </Tilt>
           </FadeIn>
 
           <FadeIn delay={0.1}>
@@ -122,6 +134,7 @@ export default function Home() {
                   banner={project.banner}
                   icon={project.icon}
                   link={project.link}
+                  slug={project.slug}
                   tags={project.tags}
                   className="h-full"
                 />
