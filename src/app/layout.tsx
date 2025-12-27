@@ -19,18 +19,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://munucodes.in"),
-  title: "Munawar T | Flutter Developer (AI & ML Integration)",
-  description: "Portfolio of Munawar T, a Flutter Developer specializing in AI & ML integration. Building intelligent, high-performance, cross-platform applications.",
+  title: "Munawar T | Senior Flutter Developer - ERP, POS & Offline-First Apps",
+  description: "Portfolio of Munawar T, a Senior Flutter Developer with 4+ years of experience building ERP-integrated mobile applications, POS systems, and offline-first solutions.",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://munucodes.in",
-    title: "Munawar T | Flutter Developer",
-    description: "Portfolio of Munawar T, a Flutter Developer specializing in AI & ML integration.",
+    title: "Munawar T | Senior Flutter Developer",
+    description: "Portfolio of Munawar T, a Senior Flutter Developer specializing in ERP, POS & offline-first applications.",
     siteName: "Munawar T Portfolio",
     images: [
       {
-        url: "/images/photos/colored.png",
+        url: "/images/photos/photo.png",
         width: 1200,
         height: 630,
         alt: "Munawar T Portfolio",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Munawar T | Flutter Developer",
-    description: "Portfolio of Munawar T, a Flutter Developer specializing in AI & ML integration.",
-    images: ["/images/photos/colored.png"],
+    title: "Munawar T | Senior Flutter Developer",
+    description: "Portfolio of Munawar T, a Senior Flutter Developer specializing in ERP, POS & offline-first applications.",
+    images: ["/images/photos/photo.png"],
     creator: "@munawr23",
   },
 };
@@ -54,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
         <ThemeProvider

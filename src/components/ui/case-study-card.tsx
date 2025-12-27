@@ -44,7 +44,7 @@ export const CaseStudyCard = ({
                             src={banner}
                             alt={title}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
                         <div className="absolute bottom-4 left-4 flex items-center gap-3">

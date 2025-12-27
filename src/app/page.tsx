@@ -28,90 +28,173 @@ const SkillsMarquee = dynamic(() => import("@/components/ui/skills-marquee").the
   loading: () => <div className="h-20 w-full animate-pulse bg-neutral-100 dark:bg-neutral-800" />,
 });
 
+const ProjectsGrid = dynamic(() => import("@/components/ui/projects-grid").then(mod => mod.ProjectsGrid), {
+  loading: () => <div className="h-96 w-full animate-pulse bg-neutral-100 dark:bg-neutral-800" />,
+});
+
+const ExperienceSection = dynamic(() => import("@/components/ui/experience-section").then(mod => mod.ExperienceSection), {
+  loading: () => <div className="h-96 w-full animate-pulse bg-neutral-100 dark:bg-neutral-800" />,
+});
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-background font-sans overflow-hidden">
       <HeroHighlight>
-        <StaggerContainer className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4" id="home">
-          <FadeIn>
-            <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} scale={1.1} transitionSpeed={2500}>
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl cursor-pointer"
-              >
-                <Image
-                  src={data.basic.photos[0]}
-                  alt={data.basic.firstName}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
-            </Tilt>
-          </FadeIn>
+        <div className="relative z-20 h-full w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4 md:px-8" id="home">
+          {/* Left Side: Photo */}
+          <div className="flex-1 flex justify-center md:justify-start items-end self-end overflow-hidden">
+            <div className="relative w-72 h-[350px] md:w-[380px] md:h-[480px] lg:w-[450px] lg:h-[580px] group cursor-pointer">
+              {/* Circular gradient glow */}
+              <div className="absolute inset-0 -z-10 bg-gradient-radial from-white/20 via-white/5 to-transparent blur-2xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+              <Image
+                src={data.basic.photos[0]}
+                alt="Main Profile Photo"
+                fill
+                priority
+                sizes="(max-width: 768px) 288px, (max-width: 1024px) 380px, 450px"
+                className="object-contain object-bottom grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500 relative z-10"
+              />
+            </div>
+          </div>
 
-          <FadeIn delay={0.1}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium mb-6">
+          {/* Right Side: Text Content */}
+          <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-sm font-medium">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
               Available for new projects
             </div>
-          </FadeIn>
 
-          <FadeIn delay={0.2}>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
               Hi, I'm {data.basic.firstName}. <br />
               <Highlight className="text-black dark:text-white">
                 I build intelligent apps.
               </Highlight>
             </h1>
-          </FadeIn>
 
-          <FadeIn delay={0.3}>
-            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 max-w-xl leading-relaxed">
               {data.basic.title}. I specialize in building high-performance cross-platform applications
               integrated with on-device AI and Machine Learning.
             </p>
-          </FadeIn>
 
-          <FadeIn delay={0.4} className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="mailto:devmunawar@gmail.com"
-              className="px-8 py-4 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold hover:scale-105 transition-transform"
-            >
-              Contact Me
-            </Link>
-            <Link
-              href={data.basic.resume}
-              target="_blank"
-              className="px-8 py-4 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
-            >
-              Download CV
-            </Link>
-          </FadeIn>
-        </StaggerContainer>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="mailto:devmunawar@gmail.com"
+                className="px-8 py-4 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold hover:scale-105 transition-transform"
+              >
+                Contact Me
+              </Link>
+              <Link
+                href={data.basic.resume}
+                target="_blank"
+                className="px-8 py-4 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+              >
+                Download CV
+              </Link>
+            </div>
+          </div>
+        </div>
       </HeroHighlight>
 
       <StaggerContainer className="max-w-7xl mx-auto px-4 md:px-8 pb-20 space-y-32">
 
-        {/* About / Skills Section */}
-        <section id="skills" className="space-y-12 pt-20">
-          <FadeIn>
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                Engineering <span className="text-primary">Arsenal</span>
+
+
+
+
+        {/* About Me Section */}
+        <section id="about" className="pt-10 pb-10">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            {/* Left Side: Text Content */}
+            <div className="flex-1 space-y-6 text-center md:text-left">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                About Me
               </h2>
-              <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                My tech stack is built on modern, scalable technologies. I focus on performance,
-                clean architecture, and seamless user experiences.
+              <p className="text-xl text-neutral-400 leading-relaxed">
+                {data.about.description}
               </p>
             </div>
-          </FadeIn>
-          <SkillsMarquee items={data.about.tech} speed="slow" />
+
+            {/* Right Side: Photo with B&W to Color Hover */}
+            <div className="flex-1 flex justify-center md:justify-end">
+              <div className="relative w-64 h-80 md:w-80 md:h-[420px] lg:w-[400px] lg:h-[520px] rounded-2xl overflow-visible group cursor-pointer">
+                {/* Circular gradient glow */}
+                <div className="absolute inset-0 -z-10 bg-gradient-radial from-white/20 via-white/5 to-transparent blur-2xl scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+                <Image
+                  src={data.basic.photos[1]}
+                  alt="Profile Photo"
+                  fill
+                  sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 400px"
+                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 relative z-10"
+                />
+              </div>
+            </div>
+          </div>
         </section>
+
+        {/* About / Skills Section */}
+        <section id="skills" className="space-y-16 pt-20">
+          <FadeIn>
+            <div className="text-center space-y-6">
+              {/* Decorative badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+                </span>
+                <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Tech Stack
+                </span>
+              </div>
+
+              {/* Title with gradient */}
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                Engineering{" "}
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 bg-clip-text text-transparent">
+                    Arsenal
+                  </span>
+                  <span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 rounded-full opacity-50"></span>
+                </span>
+              </h2>
+
+              {/* Enhanced description */}
+              <p className="text-lg md:text-xl text-neutral-500 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+                Built on <span className="text-white font-semibold">modern</span>,{" "}
+                <span className="text-white font-semibold">scalable</span> technologies.
+                I focus on <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent font-semibold">performance</span>,{" "}
+                <span className="bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent font-semibold">clean architecture</span>, and{" "}
+                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent font-semibold">seamless user experiences</span>.
+              </p>
+
+              {/* Stats row */}
+              <div className="flex flex-wrap justify-center gap-8 pt-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">4+</div>
+                  <div className="text-sm text-neutral-500">Years Experience</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent">30+</div>
+                  <div className="text-sm text-neutral-500">Technologies</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">15+</div>
+                  <div className="text-sm text-neutral-500">Projects Delivered</div>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+          <div className="space-y-4">
+            <SkillsMarquee items={data.about.tech.slice(0, 8)} speed="slow" direction="right" />
+            <SkillsMarquee items={data.about.tech.slice(8, 16)} speed="normal" direction="left" />
+            <SkillsMarquee items={data.about.tech.slice(16)} speed="slow" direction="right" />
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <ExperienceSection experience={data.experience} careerSnapshot={data.careerSnapshot} />
 
         {/* Featured Projects / Case Studies */}
         <section id="projects" className="space-y-12 pt-20">
@@ -121,26 +204,11 @@ export default function Home() {
                 Featured <span className="text-primary">Case Studies</span>
               </h2>
               <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                Real-world solutions built for scale. From fleet management to industrial automation.
+                Real-world solutions built for scale. From ERP integrations to POS systems.
               </p>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {data.projects.slice(0, 4).map((project, i) => (
-              <StaggerItem key={i}>
-                <CaseStudyCard
-                  title={project.title}
-                  description={project.description}
-                  banner={project.banner}
-                  icon={project.icon}
-                  link={project.link}
-                  slug={project.slug}
-                  tags={project.tags}
-                  className="h-full"
-                />
-              </StaggerItem>
-            ))}
-          </div>
+          <ProjectsGrid projects={data.projects} />
         </section>
 
         {/* Code Snippet Showcase */}

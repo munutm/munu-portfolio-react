@@ -6,12 +6,22 @@ import { Send, CheckCircle, Loader2 } from "lucide-react";
 
 export const ContactForm = () => {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        // Create mailto link with form data
+        const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+        const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+        const mailtoLink = `mailto:devmunawar@gmail.com?subject=${subject}&body=${body}`;
+
+        // Open email client
+        window.location.href = mailtoLink;
+
+        // Show success after brief delay
+        await new Promise((resolve) => setTimeout(resolve, 500));
         setStatus("success");
     };
 
@@ -44,6 +54,8 @@ export const ContactForm = () => {
                             type="text"
                             id="name"
                             required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             className="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                             placeholder="John Doe"
                         />
@@ -55,6 +67,8 @@ export const ContactForm = () => {
                             type="email"
                             id="email"
                             required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             className="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                             placeholder="john@example.com"
                         />
@@ -66,6 +80,8 @@ export const ContactForm = () => {
                             id="message"
                             required
                             rows={4}
+                            value={formData.message}
+                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                             className="w-full px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
                             placeholder="Tell me about your project..."
                         />

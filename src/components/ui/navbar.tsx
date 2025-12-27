@@ -11,6 +11,7 @@ const navItems = [
     { name: "Home", link: "home" },
     { name: "About", link: "about" },
     { name: "Skills", link: "skills" },
+    { name: "Experience", link: "experience" },
     { name: "Projects", link: "projects" },
     { name: "Contact", link: "contact" },
 ];
@@ -56,8 +57,9 @@ export const Navbar = () => {
                     to="home"
                     smooth={true}
                     duration={500}
-                    className="text-xl font-bold cursor-pointer text-neutral-900 dark:text-white"
+                    className="flex items-center gap-2 text-xl font-bold cursor-pointer text-neutral-900 dark:text-white"
                 >
+                    <img src="/icons/Icon-192.png" alt="Logo" className="h-8 w-8 rounded-lg" />
                     Munawar T
                 </ScrollLink>
 
